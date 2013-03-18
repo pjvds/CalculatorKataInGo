@@ -2,18 +2,30 @@ package CalculatorKata
 
 import (
 	"strconv"
+	"strings"
 )
 
 func Add(input string) int {
-	if input == "" {
-		return 0
+	numbers := getNumbers(input)
+	total := 0
+
+	for _, n := range numbers {
+		total = total + n
 	}
 
-	number, err := strconv.Atoi(input)
+	return total
+}
 
-	if err != nil {
-		panic(err)
+func getNumbers(input string) []int {
+	seperated := strings.Split(input, ",")
+	numberCount := len(seperated)
+
+	result := make([]int, numberCount)
+
+	for i := 0; i < numberCount; i++ {
+		number := seperated[i]
+		result[i], _ = strconv.Atoi(number)
 	}
 
-	return number
+	return result
 }
