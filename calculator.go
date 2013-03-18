@@ -1,5 +1,19 @@
 package CalculatorKata
 
+import (
+	"strconv"
+)
+
 func Add(input string) int {
-	return 0
+	if input == "" {
+		return 0
+	}
+
+	number, err := strconv.Atoi(input)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return number
 }
