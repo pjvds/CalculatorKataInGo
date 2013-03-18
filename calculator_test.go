@@ -8,7 +8,7 @@ func TestAddEmptyStringReturnZero(t *testing.T) {
 	expected := 0
 
 	input := ""
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns zero on empty string")
