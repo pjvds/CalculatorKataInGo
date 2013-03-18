@@ -30,3 +30,16 @@ func TestAddReturnsInputForSingleNumber(t *testing.T) {
 		t.Errorf("Add returns %v on single number input, %v is expected", result, expected)
 	}
 }
+
+func TestAddReturnsInputForTwoNumbers(t *testing.T) {
+	expected := 4
+
+	input := "2,2"
+	result := Add(input)
+
+	if result == expected {
+		t.Log("Add returns %v as expected for two number input", result)
+	} else {
+		t.Errorf("Add returns %v on two number input, %v is expected", result, expected)
+	}
+}
