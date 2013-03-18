@@ -1,5 +1,5 @@
 package CalculatorKata
 
-func Add(input string) (int, error) {
-	return 0, nil
+func Add(input string) int {
+	return 0
 }

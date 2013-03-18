@@ -9,7 +9,7 @@ func TestAddEmptyStringReturnZero(t *testing.T) {
 	expected := 0
 
 	input := ""
-	result, _ := Add(input)
+	result := Add(input)
 
 	if result == expected {
 		t.Log("Add returns zero on empty string")
@@ -22,8 +22,7 @@ func TestAddReturnsInputForSingleNumber(t *testing.T) {
 	expected := 4
 
 	input := fmt.Sprint(expected)
-
-	result, _ := Add(input)
+	result := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for single number input", result)
