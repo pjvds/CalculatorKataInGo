@@ -17,15 +17,19 @@ func Add(input string) int {
 }
 
 func getNumbers(input string) []int {
-	seperated := strings.Split(input, ",")
-	numberCount := len(seperated)
+	separated := strings.FieldsFunc(input, isSeparator)
+	numberCount := len(separated)
 
 	result := make([]int, numberCount)
 
 	for i := 0; i < numberCount; i++ {
-		number := seperated[i]
+		number := separated[i]
 		result[i], _ = strconv.Atoi(number)
 	}
 
 	return result
+}
+
+func isSeparator(r rune) bool {
+	return r == ',' || r == '\n'
 }
