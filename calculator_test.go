@@ -82,3 +82,38 @@ func TestAddReturnsInputForNumbersSeparatedByNewlineAndComma(t *testing.T) {
 		t.Errorf("Add returns %v for numbers separated by newline and comma, %v is expected", result, expected)
 	}
 }
+
+func TestCustomSeparatorSupport(t *testing.T) {
+	expected := 12
+
+	input := "//;\n5;7"
+
+	result := Add(input)
+
+	if result != expected {
+		t.Errorf("Result was %v, but %v is expected", result, expected)
+	}
+}
+
+func TestGetSeparators(t *testing.T) {
+	input := "//;\n3;3"
+
+	separators, input := getSeparators(input)
+
+	expectedSize := 1
+	size := len(separators)
+	if size != expectedSize {
+		t.Errorf("separator slice has an invalid size of %v, %v was expected", size, expectedSize)
+	}
+
+	expectedSeparator := ';'
+	separator := separators[0]
+	if separator != expectedSeparator {
+		t.Errorf("invalid separator of %v, %v was expected", separator, expectedSeparator)
+	}
+
+	expectedInput := "3;3"
+	if input != expectedInput {
+		t.Errorf("invalid input result of '%v', '%v' was expected", input, expectedInput)
+	}
+}
