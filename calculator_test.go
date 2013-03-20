@@ -129,7 +129,7 @@ func TestGetSeparatorsX(t *testing.T) {
 		t.Errorf("separator slice has an invalid size of %v, %v was expected", size, expectedSize)
 	}
 
-	expectedSeparator := ';'
+	expectedSeparator := 'x'
 	separator := separators[0]
 	if separator != expectedSeparator {
 		t.Errorf("invalid separator of %v, %v was expected", separator, expectedSeparator)
