@@ -1,6 +1,7 @@
 package CalculatorKata
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
@@ -10,6 +11,10 @@ func Add(input string) (int, error) {
 	total := 0
 
 	for _, n := range numbers {
+		if n < 0 {
+			return 0, errors.New("no negative input allowed")
+		}
+
 		total = total + n
 	}
 
