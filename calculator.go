@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func Add(input string) int {
+func Add(input string) (int, error) {
 	numbers := getNumbers(input)
 	total := 0
 
@@ -13,7 +13,7 @@ func Add(input string) int {
 		total = total + n
 	}
 
-	return total
+	return total, nil
 }
 
 func getSeparators(input string) ([]rune, string) {

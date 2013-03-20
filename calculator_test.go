@@ -9,7 +9,7 @@ func TestAddEmptyStringReturnZero(t *testing.T) {
 	expected := 0
 
 	input := ""
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns zero on empty string")
@@ -22,7 +22,7 @@ func TestAddReturnsInputForSingleNumber(t *testing.T) {
 	expected := 4
 
 	input := fmt.Sprint(expected)
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for single number input", result)
@@ -35,7 +35,7 @@ func TestAddReturnsInputForTwoNumbers(t *testing.T) {
 	expected := 4
 
 	input := "2,2"
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for two number input separated by comma", result)
@@ -48,7 +48,7 @@ func TestAddReturnsInputForTwoNumbersSeparatedByComma(t *testing.T) {
 	expected := 4
 
 	input := "2,2"
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for two number input separated by comma", result)
@@ -61,7 +61,7 @@ func TestAddReturnsInputForTwoNumbersSeparatedByNewline(t *testing.T) {
 	expected := 4
 
 	input := "2\n2"
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for two number input separated by newline", result)
@@ -74,7 +74,7 @@ func TestAddReturnsInputForNumbersSeparatedByNewlineAndComma(t *testing.T) {
 	expected := 7
 
 	input := "2,3\n2"
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result == expected {
 		t.Log("Add returns %v as expected for numbers separated by newline and comma", result)
@@ -88,7 +88,7 @@ func TestCustomSeparatorSupport(t *testing.T) {
 
 	input := "//;\n5;7"
 
-	result := Add(input)
+	result, _ := Add(input)
 
 	if result != expected {
 		t.Errorf("Result was %v, but %v is expected", result, expected)
@@ -138,5 +138,15 @@ func TestGetSeparatorsX(t *testing.T) {
 	expectedInput := "9;12"
 	if input != expectedInput {
 		t.Errorf("invalid input result of '%v', '%v' was expected", input, expectedInput)
+	}
+}
+
+func TestNegativeInInputCauseError(t *testing.T) {
+	input := "-1"
+
+	_, err := Add(input)
+
+	if err == nil {
+		t.Errorf("Negative input '%v' didn't cause error", input)
 	}
 }
