@@ -95,7 +95,7 @@ func TestCustomSeparatorSupport(t *testing.T) {
 	}
 }
 
-func TestGetSeparators(t *testing.T) {
+func TestGetSeparatorsSemicolon(t *testing.T) {
 	input := "//;\n3;3"
 
 	separators, input := getSeparators(input)
@@ -113,6 +113,29 @@ func TestGetSeparators(t *testing.T) {
 	}
 
 	expectedInput := "3;3"
+	if input != expectedInput {
+		t.Errorf("invalid input result of '%v', '%v' was expected", input, expectedInput)
+	}
+}
+
+func TestGetSeparatorsX(t *testing.T) {
+	input := "//x\n9;12"
+
+	separators, input := getSeparators(input)
+
+	expectedSize := 1
+	size := len(separators)
+	if size != expectedSize {
+		t.Errorf("separator slice has an invalid size of %v, %v was expected", size, expectedSize)
+	}
+
+	expectedSeparator := ';'
+	separator := separators[0]
+	if separator != expectedSeparator {
+		t.Errorf("invalid separator of %v, %v was expected", separator, expectedSeparator)
+	}
+
+	expectedInput := "9;12"
 	if input != expectedInput {
 		t.Errorf("invalid input result of '%v', '%v' was expected", input, expectedInput)
 	}
