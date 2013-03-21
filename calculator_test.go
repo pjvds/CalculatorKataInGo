@@ -160,6 +160,17 @@ func TestNegativeInputCauseErrorWithMessage(t *testing.T) {
 	errorMessage := err.Error()
 
 	if !strings.HasPrefix(errorMessage, prefix) {
-		t.Errorf("Negative input error didn't had the expected prefix. Error was: %v", errorMessage)
+		t.Errorf("Negative input error message doesn't contain the expected prefix. Error message: %v", errorMessage)
+	}
+}
+
+func TestNegativeInputCauseErrorWithMessageThatListWrongInput(t *testing.T) {
+	input := "-1"
+
+	_, err := Add(input)
+	errorMessage := err.Error()
+
+	if !strings.Contains(errorMessage, input) {
+		t.Errorf("Negative input error message doesn't list negative inputs. Error message: %v", errorMessage)
 	}
 }
