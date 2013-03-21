@@ -12,7 +12,7 @@ func Add(input string) (int, error) {
 
 	for _, n := range numbers {
 		if n < 0 {
-			return 0, errors.New("no negative input allowed")
+			return 0, errors.New("negatives not allowed")
 		}
 
 		total = total + n
