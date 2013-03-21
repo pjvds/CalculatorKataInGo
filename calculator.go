@@ -2,6 +2,7 @@ package CalculatorKata
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -12,7 +13,8 @@ func Add(input string) (int, error) {
 
 	for _, n := range numbers {
 		if n < 0 {
-			return 0, errors.New("negatives not allowed")
+			msg := fmt.Sprintf("negatives not allowed: %v", n)
+			return 0, errors.New(msg)
 		}
 
 		total = total + n
