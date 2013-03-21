@@ -13,9 +13,27 @@ type input struct {
 	numbers    []int
 }
 
+type predicate func(item interface{}) bool
+
+func where(slice []interface{}, p func(item interface{}) bool) []interface{} {
+	result := make([]interface{}, 0)
+
+	for _, item := range slice {
+		if p(item) {
+			result = append(result, item)
+		}
+	}
+
+	return result
+}
+
 func Add(inputString string) (int, error) {
 	input := parse(inputString)
 	total := 0
+
+	negatives := where(input.numbers, func(item int) bool {
+		return item < 0
+	})
 
 	for _, n := range input.numbers {
 		if n < 0 {
