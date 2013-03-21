@@ -2,6 +2,7 @@ package CalculatorKata
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -148,5 +149,17 @@ func TestNegativeInInputCauseError(t *testing.T) {
 
 	if err == nil {
 		t.Errorf("Negative input '%v' didn't cause error", input)
+	}
+}
+
+func TestNegativeInputCauseErrorWithMessage(t *testing.T) {
+	input := "-1"
+	prefix := "negatives not allowed"
+
+	_, err := Add(input)
+	errorMessage := err.Error()
+
+	if !strings.HasPrefix(errorMessage, prefix) {
+		t.Errorf("Negative input error didn't had the expected prefix. Error was: %v", errorMessage)
 	}
 }
