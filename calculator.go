@@ -7,11 +7,17 @@ import (
 	"strings"
 )
 
-func Add(input string) (int, error) {
-	numbers := getNumbers(input)
+type input struct {
+	raw        string
+	delimiters []rune
+	numbers    []int
+}
+
+func Add(inputString string) (int, error) {
+	input := parse(inputString)
 	total := 0
 
-	for _, n := range numbers {
+	for _, n := range input.numbers {
 		if n < 0 {
 			msg := fmt.Sprintf("negatives not allowed: %v", n)
 			return 0, errors.New(msg)
@@ -21,6 +27,17 @@ func Add(input string) (int, error) {
 	}
 
 	return total, nil
+}
+
+func parse(inputRaw string) input {
+	delimiters, numberInput := getSeparators(inputRaw)
+	numbers := getNumbers(numberInput, delimiters)
+
+	return input{
+		raw:        inputRaw,
+		delimiters: delimiters,
+		numbers:    numbers,
+	}
 }
 
 func getSeparators(input string) ([]rune, string) {
@@ -41,10 +58,9 @@ func getSeparators(input string) ([]rune, string) {
 	return separators, input
 }
 
-func getNumbers(input string) []int {
-	separators, input := getSeparators(input)
+func getNumbers(numberInput string, separators []rune) []int {
 
-	separated := strings.FieldsFunc(input, createIsSeparator(separators))
+	separated := strings.FieldsFunc(numberInput, createIsSeparator(separators))
 	numberCount := len(separated)
 
 	result := make([]int, numberCount)
