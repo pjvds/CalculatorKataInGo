@@ -164,13 +164,15 @@ func TestNegativeInputCauseErrorWithMessage(t *testing.T) {
 	}
 }
 
-func TestNegativeInputCauseErrorWithMessageThatListWrongInput(t *testing.T) {
-	input := "-1"
+func TestNegativeInputCauseErrorWithMessageThatListWrongInputs(t *testing.T) {
+	input1 := "-1"
+	input2 := "-2"
+	input := input1 + "," + input2
 
 	_, err := Add(input)
 	errorMessage := err.Error()
 
-	if !strings.Contains(errorMessage, input) {
-		t.Errorf("Negative input error message doesn't list negative inputs. Error message: %v", errorMessage)
+	if !strings.Contains(errorMessage, input1) || !strings.Contains(errorMessage, input2) {
+		t.Errorf("Negative input error message doesn't list negative inputs -1 and -2. Error message: %v", errorMessage)
 	}
 }
